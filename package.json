@@ -5,7 +5,7 @@
     "icon": "images/icon.png",
     "description": "Syntax highlighting for kelvin language",
     "repository": "https://github.com/JiachenRen/kelvin-lang",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.39.0"
     },

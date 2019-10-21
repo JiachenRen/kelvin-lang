@@ -13,3 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.2] - 2019-10-20
 ### Added
 - Icon, screenshot, and link to Kelvin repo.
+
+## [0.0.3] - 2019-10-20
+- Update broken screenshot
