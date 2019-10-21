@@ -9,3 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2019-10-20
 ### Added
 - Preliminary syntax highlighting for Kelvin language.
+
+## [0.0.2] - 2019-10-20
+### Added
+- Icon, screenshot, and link to Kelvin repo.
