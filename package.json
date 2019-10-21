@@ -1,0 +1,26 @@
+{
+    "name": "kelvin-lang",
+    "displayName": "Kelvin Lang",
+    "publisher": "jiachenren",
+    "description": "Syntax highlighting for kelvin language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.39.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "kelvin",
+            "aliases": ["Kelvin", "kelvin-cas", "Kelvin Language"],
+            "extensions": [".kel"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "kelvin",
+            "scopeName": "source.kel",
+            "path": "./syntaxes/kelvin.tmLanguage.json"
+        }]
+    }
+}

@@ -1,0 +1,146 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Kelvin",
+	"patterns": [
+		{ "include": "#definitions" },
+		{ "include": "#functions" },
+		{ "include": "#functionCalls" },
+		{ "include": "#keywords" },
+		{ "include": "#strings" },
+		{ "include": "#operators" },
+		{ "include": "#languageConstants" },
+		{ "include": "#types"},
+		{ "include": "#builtin"},
+		{ "include": "#variables" },
+		{ "include": "#comments" }
+	],
+	"repository": {
+		"definitions" : {
+			"name" : "storage.type.function.kelvin",
+			"match" : "\\b(def|auto|prefix|infix|postfix)\\b"
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.kelvin",
+				"match": "\\b(if|else|shell|import|assert|run|compile|eval|repeat|while|for|return|try|throw)\\b"
+			},
+			{
+				"name": "keyword.other.kelvin",
+				"match": "\\s(as|is)\\s"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.kelvin",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.kelvin",
+					"match": "\\\\."
+				}
+			]
+		},
+		"functions": {
+			"name": "meta.function.kelvin",
+			"begin": "(def|auto|prefix|infix|postfix)\\s(\\w+)\\((.*)\\)\\s*{",
+			"end": "}",
+			"beginCaptures": {
+				"1" : {
+					"name" : "keyword.control.kelvin"
+				},
+				"2" : {
+					"name" : "entity.name.function.kelvin"
+				},
+				"3" : {
+					"name": "meta.function.parameters.kelvin"
+				}
+			},
+			"patterns": [
+				{"include": "#curlyBracketContent"},
+				{"include": "$self"}
+			]
+		},
+		"functionCalls": {
+			"name": "meta.function-call.with-arguments.kelvin",
+			"begin": "(\\w+)\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1" : {
+					"name": "entity.name.function.kelvin"
+				}
+			},
+			"patterns": [
+				{"include": "#parenContent"},
+				{"include": "$self"}
+			]
+		},
+		"parenContent": {
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [
+				{ "include": "#parenContent" }
+			]
+		},
+		"curlyBracketContent": {
+			"begin": "{",
+			"end": "}",
+			"patterns": [
+				{ "include": "#curlyBracketContent" }
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.kelvin",
+					"match": "(\\+|\\-|\\*|/|\\+\\+|--|\\+=|-=|\\*=|/=|&=|&|==|~|!=|=|>|<|>=|<=|%|\\^|√|:=|°|!|&&|\\|\\||::|\\||->|<<|\\.\\.\\.|<<<|\\?|===|!!|•|\\*\\*|¡|:)"
+				},
+				{
+					"name": "keyword.operator.kelvin",
+					"match": "\\s(and|or|nand|nor|xor|npr|ncr)\\s"
+				}
+			]
+		},
+		"languageConstants": {
+			"patterns": [{
+				"name": "constant.language.kelvin",
+				"match": "\\b(nan|true|false|inf)\\b"
+			}, {
+				"name": "constant.numeric.kelvin",
+				"match": "(?:0|[1-9][0-9]*(?:\\.[0-9]*)?)"
+			},
+			{
+				"name": "constant.numeric.kelvin",
+				"match": "\\\\\\w+"
+			}]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable.language.kelvin",
+					"match": "\\$\\d"
+				},
+				{
+					"name": "variable.other.readwrite.kelvin",
+					"match": "[a-zA-Z_$]+[a-zA-Z_\\d]*"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "entity.name.type",
+					"match": "@(?:string|integer|int|float80|bool|function|equation|kType|bigInt|list|pair|variable|matrix|vector|faction)\\b"
+				}
+			]
+		},
+		"comments": {
+			"name": "comment.line.number-sign.kelvin",
+			"match": "^\\s*#.*$"
+		},
+		"builtin": {
+			"name": "support.function",
+			"match": "(add|minus|mult|div|power|mod|log|log2|ln|cos|acos|cosh|sin|asin|sinh|tan|atan|tanh|sec|csc|cot|abs|int|round|negate|sqrt|sign|normCdf|normPdf|randNorm|invNorm|binomPdf|binomCdf|geomPdf|geomCdf|tPdf|tCdf|invT|zInterval|tInterval|zIntervalOneProp|zIntervalTwoSamp|tIntervalTwoSamp|mean|max|min|ssx|variance|sum|stdev|sum5n|iqr|median|outliers|oneVar|correlation|covariance|twoVar|determination|linReg|polyReg|pair|get|set|map|reduce|filter|append|size|sort|zip|shuffle|rm|contains|reverse|flatten|criticalPoints|tangent|impDif|dirDif|grad|nIntegrate|factor|expand|solve|nSolve|coef|dotP|crossP|unitVec|mag|angle|matMult|det|detCof|mat|idMat|trans|gausElim|ref|rref|transform|cofactor|adjoint|inv|random|randInt|randMat|randBool|randPrime|npr|ncr|powerset|factorial|factorize|factors|isPrime|and|or|xor|not|nor|nand|def|assign|del|if|ternary|else|pipe|invoke|func|repeat|copy|for|while|return|continue|break|stride|complexity|eval|exit|date|time|delay|run|import|compile|measure|listVars|clearVars|listFuncs|clearFuncs|shell|at|print|println|printMat|inout|readLine|readFile|appendToFile|writeToFile|pathExists|isDir|removePath|createFile|createDir|listPaths|getWorkingDir|setWorkingDir|setStackTraceEnabled|printStackTrace|clearStackTrace|setStackTraceUntracked|try|throw|assert|assertEquals|as|is|gcd|lcm|degrees|pct|concat|split|replace|regReplace|regMatches|lowercased|uppercased|setMode|prefix|infix|postfix|auto)\\s+"
+		}
+	},
+	"scopeName": "source.kel"
+}
