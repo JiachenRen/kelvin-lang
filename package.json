@@ -2,7 +2,9 @@
     "name": "kelvin-lang",
     "displayName": "Kelvin Lang",
     "publisher": "jiachenren",
+    "icon": "images/icon.png",
     "description": "Syntax highlighting for kelvin language",
+    "repository": "https://github.com/JiachenRen/kelvin-lang",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.39.0"
