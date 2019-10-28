@@ -2,9 +2,11 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Kelvin",
 	"patterns": [
-		{ "include": "#definitions" },
 		{ "include": "#functions" },
 		{ "include": "#functionCalls" },
+		{ "include": "#curlyBrackets"},
+		{ "include": "#squareBrackets"},
+		{ "include": "#parenthesis"},
 		{ "include": "#keywords" },
 		{ "include": "#strings" },
 		{ "include": "#operators" },
@@ -15,10 +17,6 @@
 		{ "include": "#comments" }
 	],
 	"repository": {
-		"definitions" : {
-			"name" : "storage.type.function.kelvin",
-			"match" : "\\b(def|auto|prefix|infix|postfix)\\b"
-		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.kelvin",
@@ -42,50 +40,107 @@
 		},
 		"functions": {
 			"name": "meta.function.kelvin",
-			"begin": "(def|auto|prefix|infix|postfix)\\s(\\w+)\\((.*)\\)\\s*{",
-			"end": "}",
+			"begin": "(def|auto|prefix|infix|postfix)\\s(\\w+)(\\()(.*)(\\))\\s*({)",
+			"end": "(})",
 			"beginCaptures": {
 				"1" : {
-					"name" : "keyword.control.kelvin"
+					"name" : "storage.type.function.kelvin"
 				},
 				"2" : {
 					"name" : "entity.name.function.kelvin"
 				},
 				"3" : {
+					"name": "meta.brace.round.kelvin"
+				},
+				"4" : {
 					"name": "meta.function.parameters.kelvin"
+				},
+				"5" : {
+					"name": "meta.brace.round.kelvin"
+				},
+				"6" : {
+					"name": "meta.brace.curly.kelvin"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.curly.kelvin"
 				}
 			},
 			"patterns": [
-				{"include": "#curlyBracketContent"},
 				{"include": "$self"}
 			]
 		},
 		"functionCalls": {
 			"name": "meta.function-call.with-arguments.kelvin",
-			"begin": "(\\w+)\\(",
-			"end": "\\)",
+			"begin": "(\\w+)(\\()",
+			"end": "(\\))",
 			"beginCaptures": {
 				"1" : {
 					"name": "entity.name.function.kelvin"
+				},
+				"2" : {
+					"name": "meta.brace.round.kelvin"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.round.kelvin"
 				}
 			},
 			"patterns": [
-				{"include": "#parenContent"},
 				{"include": "$self"}
 			]
 		},
-		"parenContent": {
-			"begin": "\\(",
-			"end": "\\)",
+		"parenthesis": {
+			"begin": "(\\()",
+			"end": "(\\))",
+			"beginCaptures": {
+				"1": {
+					"name": "meta.brace.round.kelvin"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.round.kelvin"
+				}
+			},
 			"patterns": [
-				{ "include": "#parenContent" }
+				{ "include": "$self" }
 			]
 		},
-		"curlyBracketContent": {
-			"begin": "{",
-			"end": "}",
+		"curlyBrackets": {
+			"begin": "({)",
+			"end": "(})",
+			"beginCaptures": {
+				"1": {
+					"name": "meta.brace.curly.kelvin"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.curly.kelvin"
+				}
+			},
 			"patterns": [
-				{ "include": "#curlyBracketContent" }
+				{ "include": "$self" }
+			]
+		},
+		"squareBrackets": {
+			"begin": "(\\[)",
+			"end": "(\\])",
+			"beginCaptures": {
+				"1": {
+					"name": "meta.brace.square.kelvin"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.square.kelvin"
+				}
+			},
+			"patterns": [
+				{ "include": "$self" }
 			]
 		},
 		"operators": {

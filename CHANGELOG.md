@@ -15,8 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Icon, screenshot, and link to Kelvin repo.
 
 ## [0.0.3] - 2019-10-20
-- Update broken screenshot
+- Update broken screenshot.
 
 ## [0.0.4] - 2019-10-21
 ### Added
-- New keywords
+- New keywords.
+
+## [0.0.5] - 2019-10-21
+### Added
+- Tokenization of curly, square and round brackets.
+### Changed
+- Fixed highlight of function meta type.
