@@ -9,6 +9,9 @@
     "engines": {
         "vscode": "^1.39.0"
     },
+    "scripts": {
+        "install": "rm -rf ~/.vscode/extensions/kelvin-lang && cp -r . ~/.vscode/extensions/kelvin-lang"
+    },
     "categories": [
         "Programming Languages"
     ],
